@@ -38,5 +38,8 @@ model.train(clabels,inputs,labels,1)
 tlabel,tclabel = labels_and_confounds(csvaddress = "testaddresscsv")
 tinputs = labels_and_confounds(address = "testaddress")
 
-loss,accuracy = model.model.evaluate(tinputs,tlabel)
+totalset = tf.Dataset.from_tensor_slices(tinputs,tlabel)
+
+loss,accuracy = model.model.evaluate(totalset)
+
 confound_regressor_MSE = self.test_regressor(tclabel,tinputs)
